@@ -1,6 +1,6 @@
 {
   "name": "migrate-css",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "find and replace stuff",
   "main": "./dist/index.js",
   "scripts": {

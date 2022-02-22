@@ -50,6 +50,7 @@ fileList.forEach((file) => {
     }
   })
 })
+
 if (noFileChanged) {
   console.log('- No files updated')
 }

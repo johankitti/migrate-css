@@ -1,0 +1,9 @@
+{
+  "fileTypes": [".scss"],
+  "ignores": ["./node_modules", "./dist"],
+  "replaces": {
+    "test": "fest",
+    "@media (--medium)": "@include screen-md-down",
+    "@media (--small)": "@include screen-sm-down"
+  }
+}

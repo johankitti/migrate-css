@@ -8,7 +8,7 @@ const [path] = args
 
 const configFile = fs.readFileSync('migrate-css.json')
 const { fileTypes: filesTypesToRun, ignores: filesToIgnore, replaces: replaceDict } = JSON.parse(configFile)
-console.log(JSON.parse(configFile))
+
 const REACT_LIFECYCLE_METHODS = ['render', 'componentDidMount']
 
 const findAllFiles = (dir, filelist, ignores, fileTypes) => {

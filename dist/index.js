@@ -23,9 +23,11 @@ var _args = _slicedToArray(args, 1),
 var configFile = _fs2.default.readFileSync('migrate-css.json');
 
 var _JSON$parse = JSON.parse(configFile),
-    filesTypesToRun = _JSON$parse.fileTypes,
+    fileTypesToRun = _JSON$parse.fileTypes,
     filesToIgnore = _JSON$parse.ignores,
     replaceDict = _JSON$parse.replaces;
+
+console.log('Running migrate-css on file-types: ' + fileTypesToRun.join(', '));
 
 var REACT_LIFECYCLE_METHODS = ['render', 'componentDidMount'];
 
@@ -50,7 +52,9 @@ var findAllFiles = function findAllFiles(dir, filelist, ignores, fileTypes) {
   return filelist;
 };
 
-var fileList = findAllFiles(path, [], filesToIgnore, filesTypesToRun);
+var fileList = findAllFiles(path, [], filesToIgnore, fileTypesToRun);
+
+console.log('Found ' + fileList.length + ' files');
 
 fileList.forEach(function (file) {
   var buffer = _fs2.default.readFileSync(file);

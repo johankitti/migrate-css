@@ -7,7 +7,9 @@ const [, , ...args] = process.argv
 const [path] = args
 
 const configFile = fs.readFileSync('migrate-css.json')
-const { fileTypes: filesTypesToRun, ignores: filesToIgnore, replaces: replaceDict } = JSON.parse(configFile)
+const { fileTypes: fileTypesToRun, ignores: filesToIgnore, replaces: replaceDict } = JSON.parse(configFile)
+
+console.log(`- Running migrate-css on file-types: ${fileTypesToRun.join(', ')}`)
 
 const REACT_LIFECYCLE_METHODS = ['render', 'componentDidMount']
 
@@ -28,8 +30,11 @@ const findAllFiles = (dir, filelist, ignores, fileTypes) => {
   return filelist
 }
 
-const fileList = findAllFiles(path, [], filesToIgnore, filesTypesToRun)
+const fileList = findAllFiles(path, [], filesToIgnore, fileTypesToRun)
 
+console.log(`- Found ${fileList.length} files`)
+
+let noFileChanged = true
 fileList.forEach((file) => {
   const buffer = fs.readFileSync(file)
   let fileContent = buffer.toString()
@@ -40,7 +45,12 @@ fileList.forEach((file) => {
 
   fs.writeFile(file, fileContent, () => {
     if (fileContent != oldFileContent) {
-      console.log(`Replaced contents of ${file}`)
+      noFileChanged = false
+      console.log(`  - Replaced contents of ${file}`)
     }
   })
 })
+if (noFileChanged) {
+  console.log('- No files updated')
+}
+console.log('- Finished updating files')
